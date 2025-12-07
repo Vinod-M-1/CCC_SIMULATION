@@ -1,0 +1,227 @@
+/* ===================== GLOBAL ===================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: #eef2f7;
+}
+
+.layout {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ===================== SIDEBAR ===================== */
+.sidebar {
+    width: 260px;
+    background: #0f1d3a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px 0;
+}
+
+.sidebar .logo {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.sidebar .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar .menu li {
+    padding: 15px 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar .menu li:hover {
+    background: #14274d;
+}
+
+.sidebar .menu .active {
+    background: #3c75ff;
+    border-radius: 6px;
+    margin: 5px 10px;
+}
+
+.logout-btn {
+    background: #ff3b30;
+    padding: 12px 20px;
+    margin: 20px;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #d32f27;
+}
+
+/* ===================== MAIN CONTENT ===================== */
+.content {
+    flex: 1;
+    padding: 35px 50px;
+    overflow-y: auto;
+}
+
+.content h2 {
+    margin-top: 0;
+    font-size: 26px;
+    color: #0f1d3a;
+}
+
+.page {
+    display: none;
+}
+
+.page.visible {
+    display: block;
+}
+
+/* ===================== DASHBOARD CARDS ===================== */
+.cards {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 250px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card p {
+    margin: 0;
+    color: #666;
+}
+
+.card h3 {
+    margin-top: 10px;
+    font-size: 22px;
+}
+
+/* ===================== INPUTS ===================== */
+input {
+    width: 280px;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #cbd3df;
+    font-size: 16px;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #3c75ff;
+    color: white;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #2e5dcc;
+}
+
+/* ===================== TRANSACTION HISTORY TABLE ===================== */
+#history table {
+    width: 90%;
+    margin: auto;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures equal structure */
+}
+
+#history thead th {
+    background: #eef3ff;
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+#history tbody td {
+    padding: 15px;
+    font-size: 15px;
+    vertical-align: top;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+/* Column widths */
+#history thead th:nth-child(1),
+#history tbody td:nth-child(1) {
+    width: 15%;
+}
+
+#history thead th:nth-child(2),
+#history tbody td:nth-child(2) {
+    width: 60%;
+}
+
+#history thead th:nth-child(3),
+#history tbody td:nth-child(3) {
+    width: 25%;
+    text-align: right;
+}
+
+/* Time text */
+#history tbody small {
+    color: gray;
+    font-size: 12px;
+}
+
+/* Hover */
+#history tbody tr:hover {
+    background-color: #f7faff;
+    transition: 0.2s ease-in-out;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 900px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: auto;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    #history table {
+        width: 100%;
+    }
+}

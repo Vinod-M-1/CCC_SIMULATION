@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- Brand UI -->
+    <div class="branding">
+        <div class="logo-wrap">
+            <svg class="bank-logo" viewBox="0 0 24 24">
+                <path fill="#3c75ff" d="M12 2L2 7v2h20V7l-10-5zm-8 9v7H2v2h20v-2h-2v-7H4zm8 0c1.1 0 2 .9 2 2v5h-4v-5c0-1.1.9-2 2-2z"/>
+            </svg>
+        </div>
+
+        <h2>Login</h2>
+        <p class="tag">Access your account securely</p>
+    </div>
+
+    <!-- Login Card -->
+    <div class="form-box">
+        <input type="text" id="acc" placeholder="Account Number">
+        <input type="password" id="pin" placeholder="PIN">
+
+        <button class="btn primary" onclick="login()">Login</button>
+
+        <p class="register-link" onclick="location.href='register.html'">
+            Don't have an account? <span>Create one</span>
+        </p>
+    </div>
+
+    <footer class="footer-note">
+        © 2025 Digital Bank. All rights reserved.
+    </footer>
+
+</div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>

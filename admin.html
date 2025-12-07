@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+
+<div class="dashboard">
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="brand">
+            <svg class="bank-logo" viewBox="0 0 24 24">
+                <path fill="#3c75ff" d="M12 2L2 7v2h20V7l-10-5zm-8 9v7H2v2h20v-2h-2v-7H4zm8 0c1.1 0 2 .9 2 2v5h-4v-5c0-1.1.9-2 2-2z"/>
+            </svg>
+            <h1>Admin Panel</h1>
+        </div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </header>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <button class="menu active" onclick="showSection('overview')">📊 Overview</button>
+        <button class="menu" onclick="showSection('accounts')">👤 Accounts</button>
+        <button class="menu" onclick="showSection('details')">📁 Account Details</button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section visible">
+            <h2>Dashboard Overview</h2>
+            <div class="stats">
+
+                <div class="card">
+                    <h3>Total Accounts</h3>
+                    <p id="totalAccounts">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Bank Balance</h3>
+                    <p id="totalBalance">₹0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Transactions</h3>
+                    <p id="totalTransactions">0</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ACCOUNT LIST SECTION -->
+        <section id="accounts" class="section">
+            <h2>All Accounts</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Account Number</th>
+                    <th>Balance</th>
+                </tr>
+                </thead>
+                <tbody id="accountTable"></tbody>
+            </table>
+        </section>
+
+        <!-- SINGLE ACCOUNT DETAILS -->
+        <section id="details" class="section">
+            <h2>Account Details</h2>
+
+            <div class="searchBox">
+                <input type="text" id="searchAcc" placeholder="Enter Account Number">
+                <button onclick="fetchAccount()">Search</button>
+            </div>
+
+            <div class="result" id="result"></div>
+        </section>
+    </main>
+</div>
+
+<script src="js/adminDashboard.js"></script>
+</body>
+</html>

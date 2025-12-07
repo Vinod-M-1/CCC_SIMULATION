@@ -1,0 +1,132 @@
+/* RESET */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+/* FINTECH BACKGROUND */
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #f7f9fc, #e9edf3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* BRANDING */
+.branding {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.logo-wrap {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 10px 25px rgba(0,0,0,0.08);
+  margin: 0 auto 10px;
+}
+
+.bank-logo {
+  width: 58px;
+  opacity: 0.95;
+}
+
+.branding h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin-top: 6px;
+}
+
+.tag {
+  font-size: 13px;
+  color: #5f5f5f;
+}
+
+/* LOGIN CARD */
+.form-box {
+  width: 420px;
+  padding: 38px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0px 18px 50px rgba(0,0,0,0.10);
+  display: flex;
+  flex-direction: column;
+}
+
+/* INPUTS */
+.form-box input {
+  padding: 14px;
+  margin-top: 12px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid #d5d9e2;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.form-box input:focus {
+  border-color: #3c75ff;
+  box-shadow: 0px 0px 8px rgba(60,117,255,0.25);
+}
+
+/* BUTTON */
+.btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 16px;
+  border-radius: 12px;
+  font-size: 17px;
+  cursor: pointer;
+  border: none;
+  transition: 0.25s ease;
+}
+
+.primary {
+  background: #3c75ff;
+  color: white;
+  box-shadow: 0px 4px 12px rgba(60,117,255,0.25);
+}
+
+.primary:hover {
+  background: #2f5ed7;
+  transform: translateY(-2px);
+}
+
+/* REGISTER LINK */
+.register-link {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+.register-link span {
+  color: #3c75ff;
+  font-weight: 600;
+}
+
+/* FOOTER */
+.footer-note {
+  position: absolute;
+  bottom: 22px;
+  font-size: 13px;
+  color: #7b7b7b;
+}

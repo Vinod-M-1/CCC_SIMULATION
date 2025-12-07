@@ -1,0 +1,133 @@
+/* RESET */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  color: #1c1c1c;
+}
+
+/* BACKGROUND — clean fintech style */
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #f7f9fc, #e9edf3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* BRANDING */
+.branding {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+/* CIRCULAR LOGO GLASS CONTAINER */
+.logo-wrap {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 10px 25px rgba(0,0,0,0.09);
+  margin: 0 auto 10px;
+}
+
+/* SVG Logo */
+.bank-logo {
+  width: 58px;
+  height: 58px;
+  opacity: 0.95;
+}
+
+/* TITLE + SUBLINE */
+.branding h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 6px 0 2px;
+  color: #1f1f1f;
+}
+
+.tag {
+  font-size: 13px;
+  color: #5f5f5f;
+}
+
+/* ---- MAIN CARD ---- */
+.home-box {
+  width: 420px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0px 18px 50px rgba(0,0,0,0.10);
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* CARD HEADING */
+.home-box h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2b2b2b;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #6b6b6b;
+  margin-bottom: 28px;
+}
+
+/* BUTTONS */
+.btn {
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  font-size: 17px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s;
+  border: none;
+}
+
+/* PRIMARY BUTTON */
+.primary {
+  background: #3c75ff;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(60, 117, 255, 0.25);
+}
+
+.primary:hover {
+  background: #2f5ed7;
+  transform: translateY(-2px);
+}
+
+/* SECONDARY BUTTON */
+.secondary {
+  background: #eef1f7;
+  color: #2c2c2c;
+}
+
+.secondary:hover {
+  background: #dde2eb;
+  transform: translateY(-2px);
+}
+
+/* FOOTER */
+.footer-note {
+  position: absolute;
+  bottom: 22px;
+  font-size: 13px;
+  color: #868686;
+}

@@ -1,0 +1,162 @@
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    background: #f2f4f8;
+}
+
+/* NAVBAR */
+.navbar {
+    background: white;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+}
+
+.bank-logo {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.logout-btn {
+    background: #3c75ff;
+    border: none;
+    padding: 10px 18px;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background: white;
+    position: fixed;
+    top: 65px;
+    bottom: 0;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.menu {
+    border: none;
+    background: none;
+    padding: 18px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.menu:hover, .active {
+    background: #e8edff;
+}
+
+/* MAIN CONTENT */
+.content {
+    margin-left: 240px;
+    padding: 25px;
+}
+
+.section {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+/* OVERVIEW CARDS */
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    width: 230px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.1);
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    table-layout: fixed; /* ensures even spacing */
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 14px;
+    text-align: center; /* aligns content evenly */
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 15px;
+}
+
+th {
+    background: #eef1f7;
+    font-weight: 600;
+}
+
+/* Alternate row subtle effect */
+tbody tr:nth-child(even) {
+    background: #f7f9fc;
+}
+
+/* Row hover highlight */
+tbody tr:hover {
+    background: #e7edff;
+    transition: 0.2s;
+}
+
+
+/* SEARCH + DETAILS */
+.searchBox {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.searchBox input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.searchBox button {
+    background: #3c75ff;
+    border: none;
+    padding: 12px 18px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* RESULT BOX */
+.result {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
