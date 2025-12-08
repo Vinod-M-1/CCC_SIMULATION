@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <sstream> // Included for robustness, though mostly handled by stoi/stod
 
 using namespace std;
 
@@ -174,15 +175,27 @@ Accounts *Bank::findAcc(int AccNo)
 
 void Bank::deposit()
 {
+    string input;
     int acc, p;
     double m;
 
     cout << "Enter Account Number: ";
-    cin >> acc;
+    // Clear any leftover newline character from previous inputs (like the menu choice)
+    cin.ignore();
+
+    // Read input safely as a string and convert to int
+    getline(cin, input);
+    acc = stoi(input);
+
     cout << "Enter pin: ";
-    cin >> p;
+    // Read input safely as a string and convert to int
+    getline(cin, input);
+    p = stoi(input);
+
     cout << "Enter amount to deposit: ";
-    cin >> m;
+    // Read input safely as a string and convert to double
+    getline(cin, input);
+    m = stod(input);
 
     Accounts *ptr = findAcc(acc);
 
@@ -196,15 +209,27 @@ void Bank::deposit()
 
 void Bank::withdraw()
 {
+    string input;
     int acc, p;
     double m;
 
     cout << "Enter Account Number: ";
-    cin >> acc;
+    // Clear any leftover newline character from previous inputs (like the menu choice)
+    cin.ignore();
+
+    // Read input safely as a string and convert to int
+    getline(cin, input);
+    acc = stoi(input);
+
     cout << "Enter pin: ";
-    cin >> p;
+    // Read input safely as a string and convert to int
+    getline(cin, input);
+    p = stoi(input);
+
     cout << "Enter amount to withdraw: ";
-    cin >> m;
+    // Read input safely as a string and convert to double
+    getline(cin, input);
+    m = stod(input);
 
     Accounts *ptr = findAcc(acc);
 
@@ -218,12 +243,21 @@ void Bank::withdraw()
 
 void Bank::displayAcc()
 {
+    string input;
     int acc, p;
 
     cout << "Enter Account Number: ";
-    cin >> acc;
+    // Clear any leftover newline character from previous inputs (like the menu choice)
+    cin.ignore();
+
+    // Read input safely as a string and convert to int
+    getline(cin, input);
+    acc = stoi(input);
+
     cout << "Enter pin: ";
-    cin >> p;
+    // Read input safely as a string and convert to int
+    getline(cin, input);
+    p = stoi(input);
 
     Accounts *ptr = findAcc(acc);
 
@@ -241,13 +275,19 @@ void Bank::displayAcc()
 
 void Bank::transfer()
 {
+    string input;
     int fromAcc, toAcc, pin;
     double amount;
 
     cout << "Enter Sender Account Number: ";
-    cin >> fromAcc;
+    // Clear previous newline from main menu input
+    cin.ignore();
+    getline(cin, input);
+    fromAcc = stoi(input);
+
     cout << "Enter Sender Account PIN: ";
-    cin >> pin;
+    getline(cin, input);
+    pin = stoi(input);
 
     Accounts *sender = findAcc(fromAcc);
 
@@ -263,7 +303,8 @@ void Bank::transfer()
     }
 
     cout << "Enter Receiver Account Number: ";
-    cin >> toAcc;
+    getline(cin, input);
+    toAcc = stoi(input);
 
     if (fromAcc == toAcc)
     {
@@ -280,7 +321,8 @@ void Bank::transfer()
     }
 
     cout << "Enter Amount to Transfer: ";
-    cin >> amount;
+    getline(cin, input);
+    amount = stod(input); // Safely read amount
 
     if (!sender->deductBalance(amount))
     {
@@ -314,11 +356,14 @@ int main()
         cout << "\n6. Exit\n\n";
 
         int c;
+        // This is the only place we use cin >> int without immediate cin.ignore()
+        // The cin.ignore() in the functions below handles the leftover newline here.
         cin >> c;
 
         switch (c)
         {
         case 1:
+            // This function already uses cin >> and then cin.ignore() for the subsequent getline
             Acc.createAccounts();
             break;
         case 2:
@@ -344,5 +389,3 @@ int main()
     Acc.savetofile();
     return 0;
 }
-
-
