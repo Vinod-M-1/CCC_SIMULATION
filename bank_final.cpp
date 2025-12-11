@@ -2,8 +2,8 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include <sstream> // Included for robustness, though mostly handled by stoi/stod
-
+#include <stack>
+#include <sstream>
 using namespace std;
 
 class Accounts
@@ -13,6 +13,7 @@ private:
     string name;
     int pin;
     double balance;
+    stack<string> history;
 
 public:
     void createAcc();
@@ -20,6 +21,8 @@ public:
     void display();
     void deposit(int p, double m);
     void withdraw(int p, double m);
+    void addHistory(string h);
+    void showHistory();
     int get_pin() { return pin; }
     int getAccNo() { return accN; }
     string getName() { return name; }
@@ -36,6 +39,41 @@ public:
     }
 };
 
+void Accounts::addHistory(string h)
+{
+    if (history.size() == 5)
+    {
+        stack<string> temp;
+        while (history.size() > 1)
+        {
+            temp.push(history.top());
+            history.pop();
+        }
+        history.pop();
+        while (!temp.empty())
+        {
+            history.push(temp.top());
+            temp.pop();
+        }
+    }
+    history.push(h);
+}
+
+void Accounts::showHistory()
+{
+    if (history.empty())
+    {
+        cout << "No recent transactions.\n";
+        return;
+    }
+    stack<string> temp = history;
+    while (!temp.empty())
+    {
+        cout << temp.top() << "\n";
+        temp.pop();
+    }
+}
+
 void Accounts::createAcc()
 {
     cout << "\nEnter Account number: ";
@@ -47,7 +85,7 @@ void Accounts::createAcc()
     cin >> pin;
     cout << "Enter balance: ";
     cin >> balance;
-    cout << "--- Account successfully created.---\n";
+    addHistory("Account created with balance: " + to_string(balance));
 }
 
 void Accounts::setAcc(int accnum, string n, double b, int p)
@@ -70,12 +108,11 @@ void Accounts::deposit(int p, double m)
     if (pin == p)
     {
         balance += m;
+        addHistory("Deposited: " + to_string(m));
         cout << "New balance : " << balance;
     }
     else
-    {
-        cout << "Transaction cannot be processed -> Incorrect pin.";
-    }
+        cout << "Incorrect pin.";
 }
 
 void Accounts::withdraw(int p, double m)
@@ -85,18 +122,14 @@ void Accounts::withdraw(int p, double m)
         if (m <= balance)
         {
             balance -= m;
-            cout << "\nNew balance: " << balance;
-            cout << "\nAmount " << m << " withdrawn successfully.";
+            addHistory("Withdrawn: " + to_string(m));
+            cout << "New balance: " << balance;
         }
         else
-        {
-            cout << "\nInsufficient balance.";
-        }
+            cout << "Insufficient balance.";
     }
     else
-    {
-        cout << "Transaction cannot be processed -> Incorrect pin.";
-    }
+        cout << "Incorrect pin.";
 }
 
 class Bank
@@ -113,6 +146,7 @@ public:
     void transfer();
     void savetofile();
     void loadfromfile();
+    void viewRecentTransactions();
 };
 
 void Bank::loadfromfile()
@@ -138,20 +172,8 @@ void Bank::loadfromfile()
 void Bank::savetofile()
 {
     ofstream file("accounts.txt");
-    if (!file)
-    {
-        cout << "File cannot be opened" << endl;
-        return;
-    }
-
     for (auto &a : accounts)
-    {
-        file << a.getAccNo() << " "
-             << a.getName() << " "
-             << a.get_pin() << " "
-             << a.get_balance() << "\n";
-    }
-    file.close();
+        file << a.getAccNo() << " " << a.getName() << " " << a.get_pin() << " " << a.get_balance() << "\n";
 }
 
 void Bank::createAccounts()
@@ -164,12 +186,8 @@ void Bank::createAccounts()
 Accounts *Bank::findAcc(int AccNo)
 {
     for (auto &acc : accounts)
-    {
         if (acc.getAccNo() == AccNo)
-        {
             return &acc;
-        }
-    }
     return nullptr;
 }
 
@@ -180,31 +198,23 @@ void Bank::deposit()
     double m;
 
     cout << "Enter Account Number: ";
-    // Clear any leftover newline character from previous inputs (like the menu choice)
     cin.ignore();
-
-    // Read input safely as a string and convert to int
     getline(cin, input);
     acc = stoi(input);
 
     cout << "Enter pin: ";
-    // Read input safely as a string and convert to int
     getline(cin, input);
     p = stoi(input);
 
     cout << "Enter amount to deposit: ";
-    // Read input safely as a string and convert to double
     getline(cin, input);
     m = stod(input);
 
     Accounts *ptr = findAcc(acc);
-
-    if (ptr == nullptr)
-    {
+    if (!ptr)
         cout << "ACCOUNT NOT FOUND";
-        return;
-    }
-    ptr->deposit(p, m);
+    else
+        ptr->deposit(p, m);
 }
 
 void Bank::withdraw()
@@ -214,31 +224,23 @@ void Bank::withdraw()
     double m;
 
     cout << "Enter Account Number: ";
-    // Clear any leftover newline character from previous inputs (like the menu choice)
     cin.ignore();
-
-    // Read input safely as a string and convert to int
     getline(cin, input);
     acc = stoi(input);
 
     cout << "Enter pin: ";
-    // Read input safely as a string and convert to int
     getline(cin, input);
     p = stoi(input);
 
     cout << "Enter amount to withdraw: ";
-    // Read input safely as a string and convert to double
     getline(cin, input);
     m = stod(input);
 
     Accounts *ptr = findAcc(acc);
-
-    if (ptr == nullptr)
-    {
+    if (!ptr)
         cout << "ACCOUNT NOT FOUND";
-        return;
-    }
-    ptr->withdraw(p, m);
+    else
+        ptr->withdraw(p, m);
 }
 
 void Bank::displayAcc()
@@ -247,27 +249,18 @@ void Bank::displayAcc()
     int acc, p;
 
     cout << "Enter Account Number: ";
-    // Clear any leftover newline character from previous inputs (like the menu choice)
     cin.ignore();
-
-    // Read input safely as a string and convert to int
     getline(cin, input);
     acc = stoi(input);
 
     cout << "Enter pin: ";
-    // Read input safely as a string and convert to int
     getline(cin, input);
     p = stoi(input);
 
     Accounts *ptr = findAcc(acc);
-
-    if (ptr == nullptr)
-    {
+    if (!ptr)
         cout << "ACCOUNT NOT FOUND";
-        return;
-    }
-
-    if (ptr->get_pin() == p)
+    else if (ptr->get_pin() == p)
         ptr->display();
     else
         cout << "Incorrect pin";
@@ -280,7 +273,6 @@ void Bank::transfer()
     double amount;
 
     cout << "Enter Sender Account Number: ";
-    // Clear previous newline from main menu input
     cin.ignore();
     getline(cin, input);
     fromAcc = stoi(input);
@@ -290,8 +282,7 @@ void Bank::transfer()
     pin = stoi(input);
 
     Accounts *sender = findAcc(fromAcc);
-
-    if (sender == nullptr)
+    if (!sender)
     {
         cout << "Sender account does not exist.";
         return;
@@ -308,13 +299,12 @@ void Bank::transfer()
 
     if (fromAcc == toAcc)
     {
-        cout << "Cannot transfer to the same account.";
+        cout << "Cannot transfer to same account.";
         return;
     }
 
     Accounts *receiver = findAcc(toAcc);
-
-    if (receiver == nullptr)
+    if (!receiver)
     {
         cout << "Receiver account does not exist.";
         return;
@@ -322,7 +312,7 @@ void Bank::transfer()
 
     cout << "Enter Amount to Transfer: ";
     getline(cin, input);
-    amount = stod(input); // Safely read amount
+    amount = stod(input);
 
     if (!sender->deductBalance(amount))
     {
@@ -332,38 +322,51 @@ void Bank::transfer()
 
     receiver->addBalance(amount);
 
-    cout << "\n--- Transfer Successful ---\n";
-    cout << "Amount Transferred: " << amount << "\n";
-    cout << "Sender New Balance: " << sender->get_balance() << "\n";
-    cout << "Receiver New Balance: " << receiver->get_balance() << "\n";
+    sender->addHistory("Transferred: " + to_string(amount) + " to " + to_string(toAcc));
+    receiver->addHistory("Received: " + to_string(amount) + " from " + to_string(fromAcc));
+
+    cout << "Transfer Successful\n";
+}
+
+void Bank::viewRecentTransactions()
+{
+    string input;
+    int acc, p;
+
+    cout << "Enter Account Number: ";
+    cin.ignore();
+    getline(cin, input);
+    acc = stoi(input);
+
+    cout << "Enter pin: ";
+    getline(cin, input);
+    p = stoi(input);
+
+    Accounts *ptr = findAcc(acc);
+    if (!ptr)
+        cout << "ACCOUNT NOT FOUND";
+    else if (ptr->get_pin() == p)
+        ptr->showHistory();
+    else
+        cout << "Incorrect pin";
 }
 
 int main()
 {
     int choice = 1;
     Bank Acc;
-
     Acc.loadfromfile();
 
     while (choice)
     {
-        cout << "\n\n--- MINI BANKING SYSTEM --- ";
-        cout << "\n1. Create New Account";
-        cout << "\n2. Display Account Details";
-        cout << "\n3. Deposit Amount";
-        cout << "\n4. Withdraw Amount";
-        cout << "\n5. Transfer Between Accounts";
-        cout << "\n6. Exit\n\n";
-
+        cout << "\n--- MINI BANKING SYSTEM ---\n";
+        cout << "1. Create New Account\n2. Display Account Details\n3. Deposit Amount\n4. Withdraw Amount\n5. Transfer\n6. Recent Transactions\n7. Exit\n";
         int c;
-        // This is the only place we use cin >> int without immediate cin.ignore()
-        // The cin.ignore() in the functions below handles the leftover newline here.
         cin >> c;
 
         switch (c)
         {
         case 1:
-            // This function already uses cin >> and then cin.ignore() for the subsequent getline
             Acc.createAccounts();
             break;
         case 2:
@@ -379,6 +382,9 @@ int main()
             Acc.transfer();
             break;
         case 6:
+            Acc.viewRecentTransactions();
+            break;
+        case 7:
             choice = 0;
             break;
         default:
